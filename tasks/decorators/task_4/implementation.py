@@ -1,4 +1,9 @@
-def decorator_maker():
+from time import sleep
+
+from tasks.common import MyException
+
+
+def decorator_maker(times, delay):
     """
     Обертка, которая повторяет вызов функции times раз с паузой delay секунд
     Args:
@@ -8,5 +13,18 @@ def decorator_maker():
     Returns:
         валидное значение (при вызове bool() -> True)
     """
-    raise NotImplementedError
+
+    def decorator(func):
+
+        def wrapper(*args, **kwargs):
+            for i in range(times):
+                try:
+                    return func(*args, **kwargs)
+                except Exception:
+                    pass
+                sleep(delay)
+            raise MyException
+        return wrapper
+    return decorator
+
 
