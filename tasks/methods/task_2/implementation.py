@@ -2,15 +2,16 @@ from tasks.common import MyException
 
 
 class ClassFather:
-
-    def register(self):
-        if self.__class__ == ClassFather:
+    @classmethod
+    def register(cls):
+        if cls == ClassFather:
             raise MyException
-        self.registered_list.append(self.__class__)
+        ClassFather.registered_list.append(cls)
 
-    def get_name(self):
-        if self.__class__ in self.registered_list:
-            return self._name
+    @classmethod
+    def get_name(cls):
+        if cls in ClassFather.registered_list:
+            return cls._name
         else:
             raise MyException
     _name = None

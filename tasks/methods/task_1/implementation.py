@@ -1,22 +1,19 @@
 class Coffee:
-    def __init__(self, *extra):
-        self.ingredients = ['water', 'coffee'] + list(extra)
+    def __init__(self):
+        self.ingredients = ['coffee', 'water']
 
-    @classmethod
-    def get_cappuccino(cls):
-        coffee = Coffee('milk')
-        return coffee
+    def get_cappuccino(self):
+        self.ingredients = ['coffee', 'water', 'milk']
+        return self
 
-    @classmethod
-    def get_latte(cls):
-        coffee = Coffee('syrup')
-        return coffee
+    def get_latte(self):
+        self.ingredients = ['coffee', 'water', 'syrup']
+        return self
 
-    @classmethod
-    def get_glace(cls):
-        coffee = Coffee('ice-cream')
-        return coffee
+    def get_glace(self):
+        self.ingredients = ['coffee', 'water', 'ice-cream']
+        return self
 
 
-cappuccino = Coffee.get_cappuccino()
+cappuccino = Coffee().get_cappuccino()
 print(cappuccino.ingredients)

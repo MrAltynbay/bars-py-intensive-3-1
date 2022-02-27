@@ -19,7 +19,9 @@ def decorator_maker(times, delay):
         def wrapper(*args, **kwargs):
             for i in range(times):
                 try:
-                    return func(*args, **kwargs)
+                    result = func(*args, **kwargs)
+                    assert result
+                    return result
                 except Exception:
                     pass
                 sleep(delay)
