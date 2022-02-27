@@ -20,8 +20,8 @@ def decorator_maker(times, delay):
             for i in range(times):
                 try:
                     result = func(*args, **kwargs)
-                    assert result
-                    return result
+                    if result:
+                        return result
                 except Exception:
                     pass
                 sleep(delay)
