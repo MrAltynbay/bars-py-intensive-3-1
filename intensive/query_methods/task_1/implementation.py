@@ -9,4 +9,6 @@ def get_order_count_by_customer(name):
 
     Returns: число заказов (не может быть отрицательным, но может быть нулевым)
     """
-    raise NotImplementedError
+    qs = Order.objects.filter(customer__name=name).count()
+
+    return qs
