@@ -17,7 +17,14 @@ from django.contrib import admin
 from django.urls import path
 from day_10 import views
 
+from django.urls import (
+    re_path,
+)
+
+from day_10.views import Task2View
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('calc/', views.calc, name='calc'),
+    re_path(r'task-2/$', Task2View.as_view()),
 ]

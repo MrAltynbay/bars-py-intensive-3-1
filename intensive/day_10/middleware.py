@@ -1,6 +1,7 @@
 import json
 import time
 
+from django.db import connection
 from django.http import HttpResponse
 from django.http import JsonResponse
 
@@ -60,6 +61,18 @@ class CheckErrorMiddleware(MiddlewareMixin):
         return HttpResponse(f'Ошибка: {exception}')
 
 
+class AllSqlRequests:
+    """
+        Выводит список всех sql запросов
+    """
+    def __init__(self, get_response):
+        self.get_response = get_response
 
+    def __call__(self, request):
+        response = self.get_response(request)
+        for sqls in connection.queries:
+            print(f'{sqls["sql"]} выполнятся за {sqls["time"]} секунд')
+
+        return response
 
 
