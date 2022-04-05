@@ -1,10 +1,13 @@
 from django.http import HttpResponse
 from django.template import loader
 from m3.actions import ActionPack, Action, ACD
+from m3_django_compat import get_user_model
 from m3_ext.ui.results import ExtUIScriptResult
 from recordpack.recordpack import BaseRecordPack
-from day_12.providers import TestProvider, test_data, GridItem
-from day_12.ui import MasterPanel, MasterWindow, GridWindow, ItemWindow
+from day_12.providers import ModelProvider
+from day_12.ui import MasterPanel, MasterWindow, GridWindow, EditUserWindow, CreateUserWindow
+
+User = get_user_model()
 
 
 class MasterPack(ActionPack):
@@ -86,13 +89,16 @@ class MasterRecordPack(BaseRecordPack):
     Пример RecordPack
     """
     url = '/grid'
-    provider = TestProvider(
-        data_source=test_data,
-        object_class=GridItem,
+    provider = ModelProvider(
+        data_source=User,
+        key_field='id',
     )
-    edit_window = ItemWindow
-    new_window = ItemWindow
+    edit_window = EditUserWindow
+    new_window = CreateUserWindow
 
     quick_filters = {
-        'name': {'control': {'xtype': 'textfield'}},
+        'first_name': {'control': {'xtype': 'textfield'}},
+        'last_name': {'control': {'xtype': 'textfield'}},
+        'username': {'control': {'xtype': 'textfield'}},
+        'email': {'control': {'xtype': 'textfield'}},
     }
