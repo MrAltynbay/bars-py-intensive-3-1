@@ -40,31 +40,33 @@ class Truck:
         print("whoooooooooooooooooooooh")
 
 
-cat1 = Motorbike("Honda GL 1800", 10)
-dog1 = Truck("KAMAZ", 20)
+motorbike1 = Motorbike("Honda GL 1800", 10)
+truck1 = Truck("KAMAZ", 20)
 
-for car in (cat1, dog1):
+for car in (motorbike1, truck1):
     car.make_sound()
     car.info()
     car.make_sound()
 
 
 # Множественное наследование
-class A:
-    def __init__(self):
-        super().__init__()
-        self.aa = 2
+class Auto:
+    def ride(self):
+        print("Едет по дороге")
 
 
-class B:
-    def __init__(self):
-        super().__init__()
-        self.ab = 3
+class Boat:
+    def swim(self):
+        print("Плавает по воде")
 
 
-class C(A, B):
+class Amphibian(Auto, Boat):
     pass
 
 
-c = C()
-print(c.aa, c.ab)
+a = Amphibian()
+a.ride()
+a.swim()
+
+# Показывет в каком порядке будут проинспектированы родительские классы
+print(Amphibian.mro())
